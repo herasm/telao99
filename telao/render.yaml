@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: telao
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      # Chave da IA da Capri. Não escreva a chave aqui: o Render vai pedir o valor
+      # no painel (Environment) e ela fica guardada só lá.
+      - key: GEMINI_API_KEY
+        sync: false
+    # Para guardar mensagens, fotos e salas entre reinícios, use um plano pago,
+    # descomente o bloco abaixo e troque "plan: free" por "plan: starter":
+    # disk:
+    #   name: telao-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    # E adicione em envVars:
+    #   - key: DATA_DIR
+    #     value: /var/data
